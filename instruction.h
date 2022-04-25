@@ -12,6 +12,16 @@
 #define CYAN    "\033[1m\033[36m"      /* Bold Cyan : six */
 #define RESET   "\033[0m"
 
+#define one BLACK << 1 << RESET
+#define two RED << 2 << RESET 
+#define three GREEN << 3 << RESET 
+#define four YELLOW << 4 << RESET 
+#define five BLUE << 5 << RESET
+#define six CYAN << 6 << RESET 
+#define underline(value) UNDERLINE << value << RESET
+#define highlight(value) RED << value << RESET
+
+
 class instruction{
     private:
         int m_array[6];
