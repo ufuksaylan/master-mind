@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <random>
+#include <map>
+#include <algorithm>
+#include <iterator>
 
 #include "Instruction.h"
 
@@ -10,6 +13,8 @@ class Breaker : public Instruction
     private:
         int m_code[4];
         int m_round;
+
+        int check_digits(int x);
     public: 
 
         Breaker();
@@ -18,7 +23,7 @@ class Breaker : public Instruction
         void print_m_code(); // delete this later 
 
         int get_guess();
-        
+
 
         void check_guess();
 };

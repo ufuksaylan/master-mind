@@ -16,29 +16,109 @@ int Breaker::get_random_num(){
     return uni(rng);
 }
 
-void Breaker::print_m_code(){
-    std::cout << m_code[0] << "\t" << m_code[1] << "\t"
-    << m_code[2] << "\t" << m_code[3] << std::endl;
-}
-
 int Breaker::get_guess(){
     
     std::cout << "\nTurn #" << m_round 
-    << ": Type in four numbers (1-6) to guess code, or 'q' to quit game."
+    << ": Type in four numbers (1-6) to guess code, or '-1' to quit game."
     << std::endl; 
 
     int input; 
     std::cin >> input;
 
-    while (std::cin.fail() || (!std::cin.fail() && ))
+    if (input == -1)
+    {
+        std::cout << "Thank you";
+        exit (0);
+    }
+
+    while (std::cin.fail() || (!std::cin.fail() && check_digits(input) != 4))
     {
         std::cout << highlight("Your guess should only be 4 digits between 1-6.") 
         << std::endl;
         std::cin.clear();
         std::cin.ignore(256,'\n');
         std::cin >> input;
+        if (input == -1)
+        {
+            std::cout << "Thank you";
+            exit (0);
+        }
+    }
+
+    m_round++;
+    return input; 
+}
+
+int Breaker::check_digits(int x)
+{
+    int digits = 0; 
+    while (x != 0) 
+    { 
+        x /= 10; 
+        digits++; 
+    }
+    return digits;
+}
+void Breaker::check_guess()
+{
+    int copy_code[4];
+    std::copy(std::begin(m_code), std::end(m_code), std::begin(copy_code));
+
+    int guess = get_guess();
+    
+    int guess_arr[4];
+    for (int i = 3; i >= 0; i--) {
+        guess_arr[i] = guess % 10;
+        guess /= 10;
     }
     
+    int same_location = 0;
+    std::map<int,size_t> guess_map;
 
-    return 5; 
+    for (int i = 0; i < 4; i++)
+    {
+        print_number(guess_arr[i]);
+
+        if (guess_arr[i] == copy_code[i])
+        {   
+            copy_code[i] = 0;
+            same_location++;
+            continue;
+        }
+        ++guess_map[guess_arr[i]];
+    }
+
+    int contain = 0;
+    for (auto it = guess_map.begin(); it != guess_map.end(); it++)
+    {   
+        for (int i = 0; i < 4; i++)
+        {
+            if(it -> first == copy_code[i])
+            {
+                contain++;
+                continue;
+            }
+        }
+    }
+
+    if (same_location == 4)
+    {
+        std::cout << "you broke the code";
+    }
+    while (same_location  != 0)
+    {
+        same_location--; 
+        std::cout << highlight("*") << " ";
+    }
+    while (contain != 0)
+    {
+        contain--;
+        std::cout << highlight("&") << " ";
+    }
+    std::cout << "\n";
+    print_m_code();
+}
+void Breaker::print_m_code(){
+    std::cout << m_code[0] << "\t" << m_code[1] << "\t"
+    << m_code[2] << "\t" << m_code[3] << std::endl;
 }
