@@ -93,14 +93,15 @@ void Breaker::check_guess()
     {   
         for (int i = 0; i < 4; i++)
         {
-            if(it -> first == copy_code[i])
+            if((it -> first) == copy_code[i])
             {
                 contain++;
-                continue;
+                break;
             }
         }
     }
 
+    // Put a useful return statement here
     if (same_location == 4)
     {
         std::cout << "you broke the code";
@@ -110,12 +111,13 @@ void Breaker::check_guess()
         same_location--; 
         std::cout << highlight("*") << " ";
     }
-    while (contain != 0)
+    while (contain != 0)        /* code */
     {
         contain--;
         std::cout << highlight("&") << " ";
     }
     std::cout << "\n";
+
     print_m_code();
 }
 void Breaker::print_m_code(){
