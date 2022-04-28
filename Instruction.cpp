@@ -8,27 +8,27 @@ Instruction::Instruction(): m_array {1, 2, 3, 4, 5, 6}
 void Instruction::print_number(int number){
     switch (number)  {
     case 1:
-        std::cout << one << "\t";
+        std::cout << one << "  ";
         break;
 
     case 2:
-        std::cout << two << "\t";
+        std::cout << two << "  ";
         break;
 
     case 3:
-        std::cout << three << "\t";
+        std::cout << three << "  ";
         break;
 
     case 4:
-        std::cout << four << "\t";
+        std::cout << four << "  ";
         break;
 
     case 5:
-        std::cout << five << "\t";
+        std::cout << five << "  ";
         break;
 
     case 6:
-        std::cout << six << "\t";
+        std::cout << six << "  ";
         break;   
     }         
 }
