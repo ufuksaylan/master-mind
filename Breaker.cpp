@@ -25,9 +25,10 @@ int Breaker::get_guess(){
     int input; 
     std::cin >> input;
 
+    // put a usefull return statement 
     if (input == -1)
     {
-        std::cout << "Thank you";
+        std::cout << "exit";
         exit (0);
     }
 
@@ -40,7 +41,7 @@ int Breaker::get_guess(){
         std::cin >> input;
         if (input == -1)
         {
-            std::cout << "Thank you";
+            std::cout << "exit";
             exit (0);
         }
     }
@@ -59,6 +60,7 @@ int Breaker::check_digits(int x)
     }
     return digits;
 }
+
 void Breaker::check_guess()
 {
     int copy_code[4];
@@ -71,55 +73,25 @@ void Breaker::check_guess()
         guess_arr[i] = guess % 10;
         guess /= 10;
     }
+
+    print_master_code(guess_arr);
     
     int same_location = 0;
-    std::map<int,size_t> guess_map;
-
-    for (int i = 0; i < 4; i++)
-    {
-        print_number(guess_arr[i]);
-
-        if (guess_arr[i] == copy_code[i])
-        {   
-            copy_code[i] = 0;
-            same_location++;
-            continue;
-        }
-        ++guess_map[guess_arr[i]];
-    }
-
     int contain = 0;
-    for (auto it = guess_map.begin(); it != guess_map.end(); it++)
-    {   
-        for (int i = 0; i < 4; i++)
-        {
-            if((it -> first) == copy_code[i])
-            {
-                contain++;
-                break;
-            }
-        }
-    }
+
+    check_matches(copy_code, guess_arr, same_location, contain);
 
     // Put a useful return statement here
     if (same_location == 4)
     {
         std::cout << "you broke the code";
     }
-    while (same_location  != 0)
-    {
-        same_location--; 
-        std::cout << highlight("*") << " ";
-    }
-    while (contain != 0)        /* code */
-    {
-        contain--;
-        std::cout << highlight("&") << " ";
-    }
-    std::cout << "\n";
 
-    print_m_code();
+    print_clue(same_location, contain);
+
+    print_m_code(); // delete this later 
 }
+
 void Breaker::print_m_code(){
     std::cout << m_code[0] << "\t" << m_code[1] << "\t"
     << m_code[2] << "\t" << m_code[3] << std::endl;

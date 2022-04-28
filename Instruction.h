@@ -22,11 +22,11 @@
 #define highlight(value) RED << value << RESET
 
 
-class instruction{
-    private:
+class Instruction{
+    protected:
         int m_array[6];
     public:
-        instruction();
+        Instruction();
 
         void print_instructions();
 
@@ -36,5 +36,8 @@ class instruction{
 
         void print_number(int number);
 
+        void print_clue(int asterisk, int ampersand);
+        
+        void check_matches(int* code, int* guess, int& asterisk, int& ampersand);
 
 };

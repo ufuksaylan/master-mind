@@ -1,39 +1,39 @@
-#include "instruction.h"
+#include "Instruction.h"
 
-instruction::instruction(): m_array {1, 2, 3, 4, 5, 6}
+Instruction::Instruction(): m_array {1, 2, 3, 4, 5, 6}
 {
 
 }
 
-void instruction::print_number(int number){
+void Instruction::print_number(int number){
     switch (number)  {
     case 1:
-        std::cout << BLACK << 1 << RESET << "\t";
+        std::cout << one << "\t";
         break;
 
     case 2:
-        std::cout << RED << 2 << RESET << "\t";
+        std::cout << two << "\t";
         break;
 
     case 3:
-        std::cout << GREEN << 3 << RESET << "\t";
+        std::cout << three << "\t";
         break;
 
     case 4:
-        std::cout << YELLOW << 4 << RESET << "\t";
+        std::cout << four << "\t";
         break;
 
     case 5:
-        std::cout << BLUE << 5 << RESET << "\t";
+        std::cout << five << "\t";
         break;
 
     case 6:
-        std::cout << CYAN << 6 << RESET << "\t";
+        std::cout << six << "\t";
         break;   
     }         
 }
 
-void instruction::print_master_code(int array[4]){
+void Instruction::print_master_code(int array[4]){
     
     for (int i = 0; i < 4; i++)
     {
@@ -41,17 +41,54 @@ void instruction::print_master_code(int array[4]){
     }
 }
 
-void instruction::print_master_code(int x, int y, int d, int z){
+void Instruction::print_master_code(int x, int y, int d, int z){
     print_number(x); 
     print_number(y); 
     print_number(d); 
     print_number(z);
 }
 
-void instruction::print_instructions(){
+void Instruction::print_clue(int asterisk, int ampersand){
+    while (asterisk  != 0)
+    {
+        asterisk--; 
+        std::cout << highlight("*") << " ";
+    }
+    while (ampersand != 0)        /* code */
+    {
+        ampersand--;
+        std::cout << highlight("&") << " ";
+    }
+    std::cout << "\n";
+}
+
+void Instruction::check_matches(int* code, int* guess, int& asterisk_total, int& ampersand_total){
+    
+    for (int i = 0; i < 4; i++)
+    {
+        if (guess[i] == code[i])
+        {   
+            code[i] = -1;
+            guess[i] = -2;
+            asterisk_total++;
+            continue;
+        }
+        for (int j = 0; j < 4; j++)
+        {
+            if (guess[j] == code[i])
+            {
+                code[i] = -1; 
+                guess[j] = -2;
+                ampersand_total++; 
+                break;
+            }
+        }
+    }
+}   
+void Instruction::print_instructions(){
 
     using std::cout; 
-    
+
     cout << underline("How to play Mastermind:\n") 
     << "\nThis is a 1-player game against the computer.\n"
     << "You can choose to be the code " << underline("maker") 
@@ -65,7 +102,7 @@ void instruction::print_instructions(){
     << "\nIn order to win, the code breaker needs to guess the 'master code' in 12 or less turns."
     << "\n\n" << underline("Clues:") 
     << "\nAfter each guess, there will be up to four clues to help crack the code.\n\n"
-    << highlight("*") << " This clue means you have 1 correct number in the correct location."
+    << highlight("*") << " This clue means you have 1 correct number in the correct location.\n"
     << highlight("&") << " This clue means you have 1 correct number, but in the wrong location.\n\n"
     << underline("Clue Example:") 
     << "\nTo continue the example, using the above 'master code' a guess of '1463' would produce 3 clues:\n\n"
