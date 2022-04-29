@@ -25,6 +25,7 @@ class Computer : public Instruction
         string responsePegs;
         bool won;
         int turn;
+        static int m_wins;
 
     public:
 
@@ -50,4 +51,5 @@ class Computer : public Instruction
 
         void start_guessing();
 
+        int get_wins() override;
 };

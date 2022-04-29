@@ -40,4 +40,7 @@ class Instruction{
         
         void check_matches(int* code, int* guess, int& asterisk, int& ampersand);
 
+        virtual int get_wins() = 0;
+
+        //
 };

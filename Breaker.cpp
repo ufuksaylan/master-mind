@@ -1,5 +1,8 @@
 #include "Breaker.h"
 
+int Breaker::m_wins = 0;
+
+
 Breaker::Breaker() : m_code {get_random_num(), get_random_num(), 
 get_random_num(), get_random_num()}, m_round{1} 
 {
@@ -84,6 +87,7 @@ void Breaker::check_guess()
     // Put a useful return statement here
     if (same_location == 4)
     {
+        m_wins++;
         std::cout << "you broke the code";
     }
 
@@ -95,4 +99,8 @@ void Breaker::check_guess()
 void Breaker::print_m_code(){
     std::cout << m_code[0] << "\t" << m_code[1] << "\t"
     << m_code[2] << "\t" << m_code[3] << std::endl;
+}
+
+int Breaker::get_wins(){
+    return m_wins;
 }

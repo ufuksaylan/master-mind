@@ -1,5 +1,7 @@
 #include "Computer.h"
 
+int Computer::m_wins = 0;
+
 Computer::Computer(vector<int> given_code) : NUM_COLOURS{6}, CODE_LENGTH{4},
 currentGuess{1, 1, 2, 2}, turn{1}, won{false}
 {
@@ -35,6 +37,7 @@ void Computer::start_guessing()
 
         //If the response is four colored pegs, the game is won
         if (responsePegs == "****") {
+            m_wins++;
             won = true;
             cout << "Game over. The computer broke your code." << endl;
             break;
@@ -217,4 +220,8 @@ vector<int> Computer::getNextGuess(vector<vector<int>> nextGuesses) {
     }
 
     return nextGuess;
+}
+
+int Computer::get_wins(){
+    return m_wins;
 }
