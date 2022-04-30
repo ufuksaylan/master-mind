@@ -6,8 +6,7 @@ int Breaker::m_wins = 0;
 Breaker::Breaker() : m_code {get_random_num(), get_random_num(), 
 get_random_num(), get_random_num()}, m_round{1} 
 {
-    std::cout << "\nThe computer has set the 'master code' and now it's time for you to break the code."
-    << std::endl;
+
 }
 
 int Breaker::get_random_num(){
@@ -94,7 +93,7 @@ bool Breaker::check_guess()
 
     print_clue(same_location, contain);
 
-    print_m_code(); // delete this later 
+    // print_m_code(); // delete this later 
 
     return false;
 }

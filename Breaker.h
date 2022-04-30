@@ -14,9 +14,6 @@ class Breaker : public Instruction
         int m_round; 
         static int m_wins;
         
-        
-
-
     public: 
 
         Breaker();
