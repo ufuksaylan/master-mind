@@ -9,25 +9,27 @@
 
 class Breaker : public Instruction
 {
-    private:
+    protected:
         int m_code[4];
         int m_round; 
         static int m_wins;
         
-        int check_digits(int x);
+        
 
 
     public: 
 
         Breaker();
-
+        int check_digits(int x);
         int get_random_num();
         void print_m_code(); // delete this later 
 
         int get_guess();
 
 
-        void check_guess();
+        bool check_guess();
 
         int get_wins() override;
+
+        void operator+(); 
 };

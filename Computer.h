@@ -14,7 +14,7 @@ using namespace std;
 
 class Computer : public Instruction
 {
-    private:
+    protected:
         const int NUM_COLOURS = 6;
         const int CODE_LENGTH = 4;
         vector<vector<int>> combinations; //Master set of combinations 1111 to 6666
@@ -28,7 +28,8 @@ class Computer : public Instruction
         static int m_wins;
 
     public:
-
+        Computer() = default;
+        
         Computer(vector<int> given_code);
 
         void createSet();
@@ -52,4 +53,6 @@ class Computer : public Instruction
         void start_guessing();
 
         int get_wins() override;
+
+        void operator+();  
 };

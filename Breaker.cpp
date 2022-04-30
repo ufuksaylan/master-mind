@@ -64,7 +64,7 @@ int Breaker::check_digits(int x)
     return digits;
 }
 
-void Breaker::check_guess()
+bool Breaker::check_guess()
 {
     int copy_code[4];
     std::copy(std::begin(m_code), std::end(m_code), std::begin(copy_code));
@@ -88,19 +88,26 @@ void Breaker::check_guess()
     if (same_location == 4)
     {
         m_wins++;
-        std::cout << "you broke the code";
+        std::cout << "you broke the code" << std::endl;
+        return true;
     }
 
     print_clue(same_location, contain);
 
     print_m_code(); // delete this later 
+
+    return false;
 }
 
 void Breaker::print_m_code(){
-    std::cout << m_code[0] << "\t" << m_code[1] << "\t"
-    << m_code[2] << "\t" << m_code[3] << std::endl;
+    std::cout << m_code[0] << "  " << m_code[1] << "  "
+    << m_code[2] << "  " << m_code[3] << std::endl;
 }
 
 int Breaker::get_wins(){
     return m_wins;
+}
+
+void Breaker::operator+(){
+    m_wins += 1; 
 }

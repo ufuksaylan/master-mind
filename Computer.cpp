@@ -39,7 +39,7 @@ void Computer::start_guessing()
         if (responsePegs == "****") {
             m_wins++;
             won = true;
-            cout << "Game over. The computer broke your code." << endl;
+            cout << "The computer broke your code." << endl;
             break;
         }
 
@@ -224,4 +224,8 @@ vector<int> Computer::getNextGuess(vector<vector<int>> nextGuesses) {
 
 int Computer::get_wins(){
     return m_wins;
+}
+
+void Computer::operator+(){
+    m_wins += 1; 
 }
